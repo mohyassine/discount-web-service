@@ -2,15 +2,18 @@ package com.store.discount;
 
 import java.util.Arrays;
 
+import com.store.discount.controllers.DiscountController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
+@ComponentScan(basePackages="com.store.discount")
 public class DiscountApplication {
 
     @Autowired
