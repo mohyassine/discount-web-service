@@ -5,12 +5,6 @@ public class DiscountedBill {
     private double discountValue;
     private double netPayable;
 
-    public DiscountedBill(double totalValue, double discountValue, double netPayable) {
-        this.totalValue = totalValue;
-        this.discountValue = discountValue;
-        this.netPayable = netPayable;
-    }
-
     public double getTotalValue() {
         return totalValue;
     }

@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DiscountControllerTest {
+public class DiscountControllerTest extends Utils{
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -55,6 +55,8 @@ public class DiscountControllerTest {
 
     private ShoppingCart fillShoppingCart() {
 
+        ShoppingCart shoppingCart = new ShoppingCart();
+
         Bill bill = new Bill();
         List<Product> products = new ArrayList<>();
         products.add(new Product(ProductCategory.OTHER, 90));
@@ -63,9 +65,13 @@ public class DiscountControllerTest {
         products.add(new Product(ProductCategory.GROCERY, 70));
         bill.setProducts(products);
 
-        Date firstPurchaseDate = Utils.createDate(-20);
-        Customer customer = new Customer(CustomerType.CUSTOMER, firstPurchaseDate);
-        return new ShoppingCart(bill, customer);
+        Customer customer = new Customer();
+        customer.setType(CustomerType.CUSTOMER);
+        customer.setFirstPurchaseDate(Utils.createDate(-10));
+
+        shoppingCart.setBill(bill);
+        shoppingCart.setCustomer(customer);
+        return shoppingCart;
     }
 }
 

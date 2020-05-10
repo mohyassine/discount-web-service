@@ -7,11 +7,6 @@ public class Customer {
     private CustomerType type;
     private Date firstPurchaseDate;
 
-    public Customer(CustomerType type, Date firstPurchaseDate) {
-        this.type = type;
-        this.firstPurchaseDate = firstPurchaseDate;
-    }
-
     public CustomerType getType() {
         return type;
     }

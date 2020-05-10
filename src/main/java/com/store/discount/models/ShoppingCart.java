@@ -4,11 +4,6 @@ public class ShoppingCart {
     private Bill bill;
     private Customer customer;
 
-    public ShoppingCart(Bill bill, Customer customer) {
-        this.bill = bill;
-        this.customer = customer;
-    }
-
     public Bill getBill() {
         return bill;
     }

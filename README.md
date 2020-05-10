@@ -1,2 +1,68 @@
 # discount-web-service
-A simple spring boot api that returns a discount on bills based on the customer type
+
+## Getting Started
+
+To clone repository:
+
+```bash
+git clone https://github.com/mohyassine/discount-web-service.git
+```
+
+## Intro
+A simple Spring Boot app that exposes one REST API. The endpoint  returns a discount on bills based on the following criteria:
+1. If the user is an employee of the store, he gets a 30% discount
+2. If the user is an affiliate of the store, he gets a 10% discount
+3. If the user has been a customer for over 2 years, he gets a 5% discount.
+4. For every $100 on the bill, there would be a $ 5 discount (e.g. for $ 990, you get $ 45
+as a discount).
+5. The percentage based discounts do not apply on groceries.
+6. A user can get only one of the percentage based discounts on a bill.
+
+## Frameworks, Tools, and Libraries
+Here is a list of frameworks, tools, and libraries used in this exercise
+
+* Spring MVC
+* Spring Boot
+* Maven
+* JUnit
+* MockMvc
+* JaCoCo
+* SonarQube
+* Sketch it Plugin
+* PlantUML
+* Graphviz
+
+## Maven Scripts
+The projects includes a Maven wrapper inside .mvn folder. After checking out the repository, you can use maven to build, run, test, generate coverage reports...etc.
+Note that, if you're using Windows
+
+### Build
+To build the project, run the following command from the root directory of the project.
+
+```shell script
+./mvnw clean compile
+```
+### Run the Server
+Running the project will start a REST service on port 8080 and expose API _'/api/bill-discount'_
+
+```shell script
+./mvnw spring-boot:run
+```
+
+
+### Test
+The project uses JUnit with MockMvc for web layer unit testing. To run the tests:
+
+```shell script
+./mvnw test
+```
+
+### Code Coverage
+To generate code coverage reports, use the following command, which will generate a readable report using JaCoCo Maven plugin. 
+The command will generate an HTML report under [./target/site/jacoco](./target/site/jacoco).
+
+```shell script
+./mvnw jacoco:report
+```
+
+**Note that you must run the Maven test script before running the JaCoCo report generation command.**

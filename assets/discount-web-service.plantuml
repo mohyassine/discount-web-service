@@ -4,30 +4,38 @@ title __SPRING-BOOT's Class Diagram__\n
 
   namespace com.store.discount {
     class com.store.discount.DiscountApplication {
+        ~ environment : Environment
+        + commandLineRunner()
+        {static} + main()
     }
   }
   
 
   namespace com.store.discount {
       class com.store.discount.Helpers.DiscountFormulas {
+          {static} + getAffiliateDiscount()
+          {static} + getCustomerDiscount()
+          {static} + getEmployeeDiscount()
+          {static} + getRegularDiscount()
+          {static} + getTotalNonGroceryBillValue()
       }
    }
 
 
   namespace com.store.discount {
       class com.store.discount.Helpers.Utils {
+        {static} + createDate()
+        {static} + getBillTotalValue()
+        {static} + isOldCustomer()
       }
   }
-  
-
-  namespace com.store.discount {
-      enum ApplicationConstants {
-      }
-  }
-  
 
   namespace com.store.discount {
       enum DiscountConstants {
+          AFFILIATE
+          EMPLOYEE
+          LOYAL_CUSTOMER
+          OTHER_CUSTOMERS
       }
   }
   
@@ -39,7 +47,9 @@ title __SPRING-BOOT's Class Diagram__\n
 
   namespace com.store.discount {
       class com.store.discount.models.Bill {
-        - products : List<Product>
+          - products : List<Product>
+          + getProducts()
+          + setProducts()
       }
     }
 
@@ -47,6 +57,10 @@ title __SPRING-BOOT's Class Diagram__\n
       class com.store.discount.models.Customer {
             - type : CustomerType
             - firstPurchaseDate : Date
+            + getFirstPurchaseDate()
+            + getType()
+            + setFirstPurchaseDate()
+            + setType()
       }
   }
   
