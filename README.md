@@ -8,7 +8,7 @@ To clone repository:
 git clone https://github.com/mohyassine/discount-web-service.git
 ```
 
-## Intro
+## Introduction
 A simple Spring Boot app that exposes one REST API. The endpoint  returns a discount on bills based on the following criteria:
 1. If the user is an employee of the store, he gets a 30% discount
 2. If the user is an affiliate of the store, he gets a 10% discount
@@ -59,7 +59,7 @@ The project uses JUnit with MockMvc for web layer unit testing. To run the tests
 
 ### Code Coverage
 To generate code coverage reports, use the following command, which will generate a readable report using JaCoCo Maven plugin. 
-The command will generate an HTML report under [./target/site/jacoco](./target/site/jacoco).
+The command will generate an HTML report under `./target/site/jacoco`.
 
 ```shell script
 ./mvnw jacoco:report
@@ -80,12 +80,16 @@ After running the project, you can use the discount service through any HTTP cli
 ##### Get `/`
 Return Hello message
 
-##### Post '/api/bill-discount'
+##### Post `/api/bill-discount`
 
 HTTP Method: **POST**
-Endpoint: **http://localhost:8080/api/bill-discount**
+
+Endpoint: **localhost:8080/api/bill-discount**
+
 Accept: */*
+
 Content-Type: application/json
+
 Sample Request Body:
 ```json
  {
