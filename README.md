@@ -120,4 +120,19 @@ Sample Request Body:
 }
 ```
 
+## UML Diagram
+The following is the UML diagram showing the relationship between different classes in the project.
+
+![UML Diagram](/assets/uml_diagram.png 'UML Diagram')
+
+
 ## Code Coverage Report
+After the running the Maven JaCoCo plugin command above, an HTML report is generated. Here are the coverage results for my code:
+
+![Code_Coverage](/assets/code_coverage_all_packages.png 'JaCoCo')
+
+Here is the coverage for the models package:
+![Models Package Coverage](/assets/code_coverage_models_package.png 'JaCoCo')
+
+## SonarQube Report
+
