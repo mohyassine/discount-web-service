@@ -66,3 +66,58 @@ The command will generate an HTML report under [./target/site/jacoco](./target/s
 ```
 
 **Note that you must run the Maven test script before running the JaCoCo report generation command.**
+
+## Usage
+After running the project, you can use the discount service through any HTTP client. Here is the end point documentation:
+
+#### End Points
+|HTTP Method|Route                                                       |Description                                      |
+|:----------|:-----------------------------------------------------------|:----------------------------------------------- |
+|`GET`      |[`/`](#get)                                                 |Default route                                    |
+|`POST`      |[`/api/bill-discount`](#post)                              |Calculates the discount available on a bill and the net payable amount     |
+
+
+##### Get `/`
+Return Hello message
+
+##### Post '/api/bill-discount'
+
+HTTP Method: **POST**
+Endpoint: **http://localhost:8080/api/bill-discount**
+Accept: */*
+Content-Type: application/json
+Sample Request Body:
+```json
+ {
+ 	"bill": {
+ 		"products": [{
+ 			"category": "OTHER",
+ 			"price": 90.0
+ 		}, {
+ 			"category": "OTHER",
+ 			"price": 500.0
+ 		}, {
+ 			"category": "OTHER",
+ 			"price": 400.0
+ 		}, {
+ 			"category": "GROCERY",
+ 			"price": 700.0
+ 		}]
+ 	},
+ 	"customer": {
+ 		"type": "EMPLOYEE",
+ 		"firstPurchaseDate": "2015-03-03"
+ 	}
+ }
+```
+
+Sample Request Body:
+```json
+{
+    "totalValue": 1690.0,
+    "discountValue": 297.0,
+    "netPayable": 1393.0
+}
+```
+
+## Code Coverage Report

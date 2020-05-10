@@ -46,7 +46,6 @@ public class DiscountController {
                 } else
                     discountValue = DiscountFormulas.getRegularDiscount(totalNonGroceryValue);
                 break;
-            default:
         }
 
         return billDiscountService.getDiscountedBill(totalBillValue, discountValue);

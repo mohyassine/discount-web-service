@@ -19,9 +19,9 @@ public class DiscountApplication {
     @Autowired
     Environment environment;
 
-    public static void main(String[] args) {
-        SpringApplication.run(DiscountApplication.class, args);
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(DiscountApplication.class, args);
+//    }
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {

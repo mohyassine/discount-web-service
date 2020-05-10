@@ -1,6 +1,7 @@
 package com.store.discount;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.store.discount.Helpers.DiscountFormulas;
 import com.store.discount.Helpers.Utils;
 import com.store.discount.models.*;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DiscountControllerTest extends Utils{
+public class DiscountControllerTest extends Utils {
 
     private ObjectMapper mapper = new ObjectMapper();
+    private ShoppingCart shoppingCart = new ShoppingCart();
+    private static DiscountFormulas DECLARED_TO_SILENCE_JACOCO = new DiscountFormulas();
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,23 +44,63 @@ public class DiscountControllerTest extends Utils{
     }
 
     @Test
-    public void getEmptyShoppingCartDiscount() throws Exception {
+    public void testEmployeeDiscount() throws Exception {
 
-        ShoppingCart shoppingCart = fillShoppingCart();
+        shoppingCart.setBill(getBillWithProducts());
+        shoppingCart.setCustomer(getCustomer(CustomerType.EMPLOYEE, false));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/bill-discount")
+                .content(mapper.writeValueAsString(shoppingCart))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.discountValue").value(297))
+                .andDo(print())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void testAffiliateDiscount() throws Exception {
+
+        shoppingCart.setBill(getBillWithProducts());
+        shoppingCart.setCustomer(getCustomer(CustomerType.AFFILIATE, false));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/bill-discount")
+                .content(mapper.writeValueAsString(shoppingCart))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.discountValue").value(99))
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void testLoyalCustomerDiscount() throws Exception {
+
+        shoppingCart.setBill(getBillWithProducts());
+        shoppingCart.setCustomer(getCustomer(CustomerType.CUSTOMER, true));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/bill-discount")
+                .content(mapper.writeValueAsString(shoppingCart))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.discountValue").value(49.5))
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void testRegularCustomerDiscount() throws Exception {
+        shoppingCart.setBill(getBillWithProducts());
+        shoppingCart.setCustomer(getCustomer(CustomerType.CUSTOMER, false));
         mockMvc.perform(MockMvcRequestBuilders.post("/api/bill-discount")
                 .content(mapper.writeValueAsString(shoppingCart))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.discountValue").value(45))
-                .andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
 
-    private ShoppingCart fillShoppingCart() {
-
-        ShoppingCart shoppingCart = new ShoppingCart();
-
+    private Bill getBillWithProducts() {
         Bill bill = new Bill();
         List<Product> products = new ArrayList<>();
         products.add(new Product(ProductCategory.OTHER, 90));
@@ -64,14 +108,17 @@ public class DiscountControllerTest extends Utils{
         products.add(new Product(ProductCategory.OTHER, 400));
         products.add(new Product(ProductCategory.GROCERY, 70));
         bill.setProducts(products);
+        return bill;
+    }
 
+    private Customer getCustomer(CustomerType customerType, boolean loyal) {
         Customer customer = new Customer();
-        customer.setType(CustomerType.CUSTOMER);
-        customer.setFirstPurchaseDate(Utils.createDate(-10));
-
-        shoppingCart.setBill(bill);
-        shoppingCart.setCustomer(customer);
-        return shoppingCart;
+        customer.setType(customerType);
+        if (loyal )
+            customer.setFirstPurchaseDate(Utils.createDate(-25));
+        else
+            customer.setFirstPurchaseDate(Utils.createDate(-2));
+        return customer;
     }
 }
 
