@@ -127,7 +127,7 @@ Sample Request Body:
 ## UML Diagram
 The following is the UML diagram showing the relationship between different classes in the project.
 
-![UML Diagram](/assets/uml_diagram.png =400x200 'UML Diagram')
+![UML Diagram](/assets/uml_diagram.png 'UML Diagram')
 
 
 ## Code Coverage Report
@@ -136,6 +136,7 @@ After the running the Maven JaCoCo plugin command above, an HTML report is gener
 ![](/assets/code_coverage_all_packages.png 'JaCoCo')
 
 Here is the coverage for the models package:
+
 ![](/assets/code_coverage_models_package.png 'JaCoCo')
 
 ## SonarQube Report
