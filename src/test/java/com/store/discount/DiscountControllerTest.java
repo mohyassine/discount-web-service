@@ -23,8 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(DiscountController.class)
 public class DiscountControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -36,7 +34,9 @@ public class DiscountControllerTest {
     public void getHello() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
+                .andExpect(content().string(equalTo("Hello from Store Discount App!")))
+                .andDo(print())
+                .andReturn().getResponse().getContentAsString();;
     }
 
     @Test

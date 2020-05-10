@@ -8,23 +8,24 @@ import com.store.discount.models.ShoppingCart;
 import com.store.discount.services.BillDiscountService;
 import com.store.discount.services.BillDiscountServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.validation.Valid;
 import java.util.Date;
 
 @RestController
-@RequestMapping("api/bill-discount")
 public class DiscountController {
 
     @Autowired
     private BillDiscountService billDiscountService = new BillDiscountServiceImp();
 
-    @PostMapping
+    @GetMapping("/")
+    public String index() {
+        return "Hello from Store Discount App!";
+    }
+
+    @PostMapping("api/bill-discount")
     public DiscountedBill createDiscount(@Valid @RequestBody ShoppingCart shoppingCart) {
 
         Bill bill = shoppingCart.getBill();

@@ -1,0 +1,117 @@
+@startuml
+
+title __SPRING-BOOT's Class Diagram__\n
+
+  namespace com.store.discount {
+    class com.store.discount.DiscountApplication {
+    }
+  }
+  
+
+  namespace com.store.discount {
+      class com.store.discount.Helpers.DiscountFormulas {
+      }
+   }
+
+
+  namespace com.store.discount {
+      class com.store.discount.Helpers.Utils {
+      }
+  }
+  
+
+  namespace com.store.discount {
+      enum ApplicationConstants {
+      }
+  }
+  
+
+  namespace com.store.discount {
+      enum DiscountConstants {
+      }
+  }
+  
+
+  namespace com.store.discount {
+      class com.store.discount.controllers.DiscountController {
+      }
+  }
+
+  namespace com.store.discount {
+      class com.store.discount.models.Bill {
+        - products : List<Product>
+      }
+    }
+
+  namespace com.store.discount {
+      class com.store.discount.models.Customer {
+            - type : CustomerType
+            - firstPurchaseDate : Date
+      }
+  }
+  
+
+  namespace com.store.discount {
+      enum CustomerType {
+            AFFILIATE
+            CUSTOMER
+            EMPLOYEE
+      }
+  }
+  
+
+  namespace com.store.discount {
+      class com.store.discount.models.DiscountedBill {
+        - totalValue : double
+        - discountValue : double
+        - netPayable : double
+      }
+  }
+  
+
+  namespace com.store.discount {
+      class com.store.discount.models.Product {
+            - category : ProductCategory
+            - price : double
+      }
+  }
+  
+
+  namespace com.store.discount {
+      enum ProductCategory {
+         GROCERY
+         OTHER
+      }
+  }
+
+
+  namespace com.store.discount {
+      class com.store.discount.models.ShoppingCart {
+        - bill : Bill
+        - customer : Customer
+      }
+  }
+  
+
+  namespace com.store.discount {
+      interface com.store.discount.services.BillDiscountService {
+      }
+  }
+  
+
+  namespace com.store.discount {
+      class com.store.discount.services.BillDiscountServiceImp {
+      }
+  }
+  
+
+  com.store.discount.controllers.DiscountController o-- com.store.discount.services.BillDiscountService : billDiscountService
+  com.store.discount.models.Customer o-- com.store.discount.models.CustomerType : type
+  com.store.discount.models.Product o-- com.store.discount.models.ProductCategory : category
+  com.store.discount.models.ShoppingCart o-- com.store.discount.models.Bill : bill
+  com.store.discount.models.ShoppingCart *-- com.store.discount.models.Customer : customer
+  com.store.discount.models.Bill "1" *-- "*" com.store.discount.models.Product : products
+  com.store.discount.services.BillDiscountServiceImp .up.|> com.store.discount.services.BillDiscountService
+
+
+@enduml
