@@ -1,8 +1,5 @@
 package com.store.discount;
 
-import java.util.Arrays;
-
-import com.store.discount.controllers.DiscountController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

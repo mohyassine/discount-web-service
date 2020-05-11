@@ -12,7 +12,7 @@ title __SPRING-BOOT's Class Diagram__\n
   
 
   namespace com.store.discount {
-      class com.store.discount.Helpers.DiscountFormulas {
+      class com.store.discount.helpers.DiscountFormulas {
           {static} + getAffiliateDiscount()
           {static} + getCustomerDiscount()
           {static} + getEmployeeDiscount()
@@ -23,7 +23,7 @@ title __SPRING-BOOT's Class Diagram__\n
 
 
   namespace com.store.discount {
-      class com.store.discount.Helpers.Utils {
+      class com.store.discount.helpers.Utils {
         {static} + createDate()
         {static} + getBillTotalValue()
         {static} + isOldCustomer()

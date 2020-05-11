@@ -1,4 +1,4 @@
-package com.store.discount.Helpers;
+package com.store.discount.helpers;
 
 import com.store.discount.constants.DiscountConstants;
 import com.store.discount.models.Bill;
@@ -7,6 +7,7 @@ import com.store.discount.models.ProductCategory;
 
 public class DiscountFormulas {
 
+    private DiscountFormulas() {}
 
     public static double getTotalNonGroceryBillValue(Bill bill) {
         double totalBillValue = 0;

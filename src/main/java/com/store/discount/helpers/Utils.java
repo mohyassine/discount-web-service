@@ -1,15 +1,15 @@
-package com.store.discount.Helpers;
+package com.store.discount.helpers;
 
 import com.store.discount.models.Customer;
 import com.store.discount.models.Product;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 public class Utils {
+
+    private Utils() {}
 
     public static double getBillTotalValue(List<Product> productList) {
         double totalValue = 0;
@@ -25,7 +25,6 @@ public class Utils {
      */
     public static boolean isOldCustomer(Customer customer) {
         boolean isOldCustomer;
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date twoYearsAgo = createDate(-24); // 2 years back
         isOldCustomer = customer.getFirstPurchaseDate().before(twoYearsAgo);
 

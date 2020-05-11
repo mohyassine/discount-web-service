@@ -1,18 +1,19 @@
 package com.store.discount.controllers;
 
-import com.store.discount.Helpers.DiscountFormulas;
-import com.store.discount.Helpers.Utils;
+import com.store.discount.helpers.DiscountFormulas;
+import com.store.discount.helpers.Utils;
 import com.store.discount.models.Bill;
 import com.store.discount.models.DiscountedBill;
 import com.store.discount.models.ShoppingCart;
 import com.store.discount.services.BillDiscountService;
 import com.store.discount.services.BillDiscountServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
 
 @RestController
 public class DiscountController {

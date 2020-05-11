@@ -1,8 +1,8 @@
 package com.store.discount;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.store.discount.Helpers.DiscountFormulas;
-import com.store.discount.Helpers.Utils;
+import com.store.discount.helpers.DiscountFormulas;
+import com.store.discount.helpers.Utils;
 import com.store.discount.models.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -24,12 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DiscountControllerTest extends Utils {
+public class DiscountControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
     private ShoppingCart shoppingCart = new ShoppingCart();
-    private static DiscountFormulas DECLARED_TO_SILENCE_JACOCO = new DiscountFormulas();
-
 
     @Autowired
     private MockMvc mockMvc;
