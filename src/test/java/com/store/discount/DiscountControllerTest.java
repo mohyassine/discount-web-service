@@ -1,7 +1,6 @@
 package com.store.discount;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.store.discount.helpers.DiscountFormulas;
 import com.store.discount.helpers.Utils;
 import com.store.discount.models.*;
 import org.junit.jupiter.api.Test;
@@ -37,7 +36,7 @@ public class DiscountControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Hello from Store Discount App!")))
                 .andDo(print())
-                .andReturn().getResponse().getContentAsString();;
+                .andReturn().getResponse().getContentAsString();
     }
 
     @Test

@@ -43,7 +43,7 @@ To build the project, run the following command from the root directory of the p
 ./mvnw clean compile
 ```
 ### Run the Server
-Running the project will start a REST service on port 8080 and expose API _'/api/bill-discount'_
+Running the project will start a REST service on port 8080 and expose URL _'/api/bill-discount'_
 
 ```shell script
 ./mvnw spring-boot:run
@@ -77,16 +77,17 @@ After running the project, you can use the discount service through any HTTP cli
 |`POST`      |[`/api/bill-discount`](#post)                              |Calculates the discount available on a bill and the net payable amount     |
 
 
-##### Get `/`
+### GET `/`
 Return Hello message
 
-##### Post `/api/bill-discount`
+##### POST 
+`/api/bill-discount`
 
 HTTP Method: **POST**
 
 Endpoint: **localhost:8080/api/bill-discount**
 
-Accept: */*
+Accept: \*/\*
 
 Content-Type: application/json
 
@@ -142,9 +143,9 @@ Here is the coverage for the models package:
 ## SonarQube Report
 The code quality was analyzed using SonarQube. Here are some screenshots for the code analysis results of my project:
 
-![](/assets/sonar_report.png 'SonarQube Report')
+![](/assets/Sonar_report.png 'SonarQube Report')
 
-![](/assets/sonar_report.png 'SonarQube Report Summary')
+![](/assets/sonar_report_summary.png 'SonarQube Report Summary')
 
 To analyze the code:
 * Download and extract SonarQube from [here](https://www.sonarqube.org/downloads/).
