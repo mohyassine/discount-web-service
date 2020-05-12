@@ -18,6 +18,8 @@ as a discount).
 5. The percentage based discounts do not apply on groceries.
 6. A user can get only one of the percentage based discounts on a bill.
 
+---
+
 ## Frameworks, Tools, and Libraries
 Here is a list of frameworks, tools, and libraries used in this exercise
 
@@ -31,6 +33,8 @@ Here is a list of frameworks, tools, and libraries used in this exercise
 * Sketch it Plugin
 * PlantUML
 * Graphviz
+
+---
 
 ## Maven Scripts
 The projects includes a Maven wrapper inside .mvn folder. After checking out the repository, you can use maven to build, run, test, generate coverage reports...etc.
@@ -67,20 +71,22 @@ The command will generate an HTML report under `./target/site/jacoco`.
 
 **Note that you must run the Maven test script before running the JaCoCo report generation command.**
 
+---
+
 ## Usage
 After running the project, you can use the discount service through any HTTP client. Here is the end point documentation:
 
-#### End Points
+### End Points
 |HTTP Method|Route                                                       |Description                                      |
 |:----------|:-----------------------------------------------------------|:----------------------------------------------- |
 |`GET`      |[`/`](#get)                                                 |Default route                                    |
 |`POST`      |[`/api/bill-discount`](#post)                              |Calculates the discount available on a bill and the net payable amount     |
 
 
-### GET `/`
+#### GET `/`
 Return Hello message
 
-##### POST 
+#### POST 
 `/api/bill-discount`
 
 HTTP Method: **POST**
@@ -124,12 +130,14 @@ Sample Request Body:
     "netPayable": 1393.0
 }
 ```
+---
 
 ## UML Diagram
 The following is the UML diagram showing the relationship between different classes in the project.
 
 ![UML Diagram](/assets/uml_diagram.png 'UML Diagram')
 
+---
 
 ## Code Coverage Report
 After the running the Maven JaCoCo plugin command above, an HTML report is generated. Here are the coverage results for my code:
@@ -139,6 +147,8 @@ After the running the Maven JaCoCo plugin command above, an HTML report is gener
 Here is the coverage for the models package:
 
 ![](/assets/code_coverage_models_package.png 'JaCoCo')
+
+---
 
 ## SonarQube Report
 The code quality was analyzed using SonarQube. Here are some screenshots for the code analysis results of my project:
