@@ -140,4 +140,34 @@ Here is the coverage for the models package:
 ![](/assets/code_coverage_models_package.png 'JaCoCo')
 
 ## SonarQube Report
+The code quality was analyzed using SonarQube. Here are some screenshots for the code analysis results of my project:
 
+![](/assets/sonar_report.png 'SonarQube Report')
+
+![](/assets/sonar_report.png 'SonarQube Report Summary')
+
+To analyze the code:
+* Download and extract SonarQube from [here](https://www.sonarqube.org/downloads/).
+* From a Terminal (or Command Prompt on Windows), browse to `[SONAR_INSTALLATION_FOLDER]/bin/macosx-universal-64/` using the following command (replace `macosx-universal-64` with the folder corresponding to your machine's OS):
+```shell script
+./sonar.sh console  
+```
+* using your browser, open Sonar through the URL http://localhost:9000/, then login with admin/admin
+* Click on create new project, generate a key for the project.
+* In the project, enable Sonar on Maven by adding the following to pom.xml:
+```xml
+<pluginManagement>
+    <plugins>
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.4.0.905</version>
+        </plugin>
+    </plugins>
+</pluginManagement>
+```
+* Run the test through maven as mentioned above, then run the following command to analyze the code:
+```shell script
+./mvnw sonar:sonar -Dsonar.projectKey=Discount-Service -Dsonar.host.url=http://localhost:9000 -Dsonar.login=[GENERATED_CODE]
+```
+* The code analysis report will be available in the browser.
