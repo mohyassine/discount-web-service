@@ -3,7 +3,7 @@
 ## Table of contents
 
 - [Getting Started](#getting-started)
-- [Introductions](#introduction)
+- [Introduction](#introduction)
 - [Frameworks, Tools, and Libraries](#frameworks-tools-and-libraries)
 - [Maven Scripts](#maven-scripts)
   - [Build](#build)
@@ -107,7 +107,7 @@ After running the project, you can use the discount service through any HTTP cli
 |`GET`      |[`/api/transactions/{transactionId}/customer/{customerId}`](#get-apitransactionstransactionidcustomercustomerid)      |Calculates the discount given a customer and transaction id     |
 
 
-#### GET `/api/transactions/{transactionId}/customer/{customerId}``
+#### GET `/api/transactions/{transactionId}/customer/{customerId}`
 
 * HTTP Method: **POST**
 * Endpoint: `localhost:8080/api/transactions/{transactionId}/customer/{customerId}`
