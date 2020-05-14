@@ -78,59 +78,33 @@ The command will generate an HTML report under `./target/site/jacoco`.
 After running the project, you can use the discount service through any HTTP client. Here is the end point documentation:
 
 ### End Points
-|HTTP Method|Route                                                       |Description                                      |
-|:----------|:-----------------------------------------------------------|:----------------------------------------------- |
-|`GET`      |[`/`](#get)                                                 |Default route                                    |
-|`POST`      |[`/api/bill-discount`](#post)                              |Calculates the discount available on a bill and the net payable amount     |
+|HTTP Method|Route                                               |Description                                      |
+|:----------|:---------------------------------------------------|:----------------------------------------------- |
+|`GET`      |`/api/customers/`                                   |Gets a list of all customers in DB                                    |
+|`POST`      |`/api/cusomters`                                  |Adds a customer to DB     |
+|`GET`      |`/api/customers/count`                             |Number of customers     |
+|`GET`      |`/api/products`                                    |Gets a list of all products in DB     |
+|`POST`      |`/api/products`                                   |Adds a customer to DB     |
+|`GET`      |`/api/transactions`                                |Gets a list of all transactions in DB     |
+|`POST`      |`/api/transactions`                               |Adds a transaction to DB     |
+|`GET`      |`/api/transactions/{transactionId}/customer/{customerId}`      |Calculates the discount given a customer and transaction id     |
 
 
-#### GET `/`
-Return Hello message
+#### GET `/api/transactions/{transactionId}/customer/{customerId}``
 
-#### POST 
-`/api/bill-discount`
-
-HTTP Method: **POST**
-
-Endpoint: **localhost:8080/api/bill-discount**
-
-Accept: \*/\*
-
-Content-Type: application/json
-
-Sample Request Body:
-```json
- {
- 	"bill": {
- 		"products": [{
- 			"category": "OTHER",
- 			"price": 90.0
- 		}, {
- 			"category": "OTHER",
- 			"price": 500.0
- 		}, {
- 			"category": "OTHER",
- 			"price": 400.0
- 		}, {
- 			"category": "GROCERY",
- 			"price": 700.0
- 		}]
- 	},
- 	"customer": {
- 		"type": "EMPLOYEE",
- 		"firstPurchaseDate": "2015-03-03"
- 	}
- }
-```
-
-Sample Request Body:
-```json
-{
-    "totalValue": 1690.0,
-    "discountValue": 297.0,
-    "netPayable": 1393.0
-}
-```
+* HTTP Method: **POST**
+* Endpoint: `localhost:8080/api/transactions/{transactionId}/customer/{customerId}`
+* Accept: \*/\*
+* Content-Type: application/json
+* Sample Request URL `localhost:8080/api/transactions/1/customer/4`
+* Sample Response Body 
+    ```json
+    {
+      "totalValue": 1690.0,
+      "discountValue": 297.0,
+      "netPayable": 1393.0
+    }
+    ```
 ---
 
 ## UML Diagram

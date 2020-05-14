@@ -20,18 +20,13 @@ public class TransactionController {
     private TransactionRepository transactionRepository;
 
     @GetMapping("/")
-    public List<Transaction> getAllCustomers() {
+    public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
 
     @PostMapping("/")
-    public Transaction createCustomer(@Valid @RequestBody Transaction transaction) {
+    public Transaction createTransaction(@Valid @RequestBody Transaction transaction) {
         return transactionRepository.save(transaction);
-    }
-
-    @GetMapping("/count")
-    public long countCustomers() {
-        return transactionRepository.findAll().size();
     }
 
     @GetMapping("/{transactionId}/customer/{customerId}")

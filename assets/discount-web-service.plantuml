@@ -20,9 +20,8 @@ title __STORE DISCOUNT SERVICE - UML Class Diagram__\n
     }
 
       class com.store.discount.controllers.TransactionController {
-          + countCustomers()
-          + createCustomer()
-          + getAllCustomers()
+          + createTransaction()
+          + getAllTransactions()
           + getBillDiscount()
       }
 
