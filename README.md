@@ -1,5 +1,23 @@
 # discount-web-service
 
+## Table of contents
+
+- [Getting Started](#getting-started)
+- [Introductions](#introduction)
+- [Frameworks, Tools, and Libraries](#frameworks-tools-and-libraries)
+- [Maven Scripts](#maven-scripts)
+  - [Build](#build)
+  - [Run the Server](#run-the-server)
+  - [Test](#test)
+  - [Code Coverage](#code-coverage)
+- [Usage](#usage)
+  - [End Points](#end-points)
+    - [Get Discount](#get-apitransactionstransactionidcustomercustomerid)
+  - [UML Diagram](#uml-diagram)
+  - [Data Design](#data-design)
+  - [Code Coverage Report](#code-coverage-report)
+  - [SonarQube Report](#sonarqube-report)
+
 ## Getting Started
 
 To clone repository:
@@ -9,7 +27,7 @@ git clone https://github.com/mohyassine/discount-web-service.git
 ```
 
 ## Introduction
-A simple Spring Boot app that exposes one REST API. The endpoint  returns a discount on bills based on the following criteria:
+Discount is a simple Spring Boot app that exposes several REST API end-points to manipulate store purchases data and calculate discounts. The discount is based on the following criteria:
 1. If the user is an employee of the store, he gets a 30% discount
 2. If the user is an affiliate of the store, he gets a 10% discount
 3. If the user has been a customer for over 2 years, he gets a 5% discount.
@@ -23,12 +41,12 @@ as a discount).
 ## Frameworks, Tools, and Libraries
 Here is a list of frameworks, tools, and libraries used in this exercise
 
-* Spring MVC
-* Spring Boot
-* Maven
+* Spring MVC, Spring Boot, and Spring Data JPA
 * H2 DB - In memory DB
-* JUnit
+* Maven
+* JUnit 5
 * MockMvc
+* Lombock
 * JaCoCo
 * SonarQube
 * Sketch it Plugin
@@ -53,7 +71,6 @@ Running the project will start a REST service on port 8080 and expose URL _'/api
 ```shell script
 ./mvnw spring-boot:run
 ```
-
 
 ### Test
 The project uses JUnit with MockMvc for web layer unit testing. To run the tests:
@@ -87,7 +104,7 @@ After running the project, you can use the discount service through any HTTP cli
 |`POST`      |`/api/products`                                   |Adds a customer to DB     |
 |`GET`      |`/api/transactions`                                |Gets a list of all transactions in DB     |
 |`POST`      |`/api/transactions`                               |Adds a transaction to DB     |
-|`GET`      |`/api/transactions/{transactionId}/customer/{customerId}`      |Calculates the discount given a customer and transaction id     |
+|`GET`      |[`/api/transactions/{transactionId}/customer/{customerId}`](#get-apitransactionstransactionidcustomercustomerid)      |Calculates the discount given a customer and transaction id     |
 
 
 #### GET `/api/transactions/{transactionId}/customer/{customerId}``
@@ -113,6 +130,15 @@ The following is the UML diagram showing the relationship between different clas
 ![UML Diagram](/assets/uml_diagram.png 'UML Diagram')
 
 ---
+
+## Data Design
+
+The service is using H2 in-memory database. Data is store in 3 table: CUSTOMERS, PRODUCTS, and TRANSACTIONS. 
+Below screenshot is take from H2 console, showing the list of tables and column names.
+
+![DB_TABLES](/assets/H2_console_tables.png 'UML Diagram')
+
+ 
 
 ## Code Coverage Report
 After the running the Maven JaCoCo plugin command above, an HTML report is generated. Here are the coverage results for my code:
