@@ -26,6 +26,7 @@ Here is a list of frameworks, tools, and libraries used in this exercise
 * Spring MVC
 * Spring Boot
 * Maven
+* H2 DB - In memory DB
 * JUnit
 * MockMvc
 * JaCoCo

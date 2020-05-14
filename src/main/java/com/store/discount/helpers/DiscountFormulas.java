@@ -1,20 +1,22 @@
 package com.store.discount.helpers;
 
 import com.store.discount.constants.DiscountConstants;
-import com.store.discount.models.Bill;
-import com.store.discount.models.Product;
 import com.store.discount.models.ProductCategory;
+import com.store.discount.models.Purchase;
+
+import java.util.List;
 
 public class DiscountFormulas {
 
-    private DiscountFormulas() {}
+    private DiscountFormulas() {
+    }
 
-    public static double getTotalNonGroceryBillValue(Bill bill) {
+    public static double getTotalNonGroceryBillValue(List<Purchase> purchases) {
         double totalBillValue = 0;
 
-        for (Product product : bill.getProducts()) {
-            if (product.getCategory() == ProductCategory.OTHER) {
-                totalBillValue += product.getPrice();
+        for (Purchase purchase : purchases) {
+            if (purchase.getCategory() == ProductCategory.OTHER) {
+                totalBillValue += purchase.getPrice();
             }
         }
 

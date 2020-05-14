@@ -1,131 +1,169 @@
 @startuml
 
-title __SPRING-BOOT's Class Diagram__\n
+title __STORE DISCOUNT SERVICE - UML Class Diagram__\n
 
-  namespace com.store.discount {
     class com.store.discount.DiscountApplication {
         ~ environment : Environment
         + commandLineRunner()
         {static} + main()
     }
-  }
-  
 
-  namespace com.store.discount {
-      class com.store.discount.helpers.DiscountFormulas {
-          {static} + getAffiliateDiscount()
-          {static} + getCustomerDiscount()
-          {static} + getEmployeeDiscount()
-          {static} + getRegularDiscount()
-          {static} + getTotalNonGroceryBillValue()
-      }
-   }
-
-
-  namespace com.store.discount {
-      class com.store.discount.helpers.Utils {
-        {static} + createDate()
-        {static} + getBillTotalValue()
-        {static} + isOldCustomer()
-      }
-  }
-
-  namespace com.store.discount {
-      enum DiscountConstants {
-          AFFILIATE
-          EMPLOYEE
-          LOYAL_CUSTOMER
-          OTHER_CUSTOMERS
-      }
-  }
-  
-
-  namespace com.store.discount {
-      class com.store.discount.controllers.DiscountController {
-      }
-  }
-
-  namespace com.store.discount {
-      class com.store.discount.models.Bill {
-          - products : List<Product>
-          + getProducts()
-          + setProducts()
-      }
+    class com.store.discount.controllers.CustomerController {
+        + countCustomers()
+        + createCustomer()
+        + getAllCustomers()
     }
 
-  namespace com.store.discount {
-      class com.store.discount.models.Customer {
-            - type : CustomerType
-            - firstPurchaseDate : Date
-            + getFirstPurchaseDate()
-            + getType()
-            + setFirstPurchaseDate()
-            + setType()
-      }
-  }
-  
+    class com.store.discount.controllers.ProductController {
+        + createProduct()
+        + getAllProducts()
+    }
 
-  namespace com.store.discount {
-      enum CustomerType {
+      class com.store.discount.controllers.TransactionController {
+          + countCustomers()
+          + createCustomer()
+          + getAllCustomers()
+          + getBillDiscount()
+      }
+
+  
+      class com.store.discount.models.Customer {
+                - firstPurchaseDate : Date
+                - id : long
+                + Customer()
+                + Customer()
+                + getFirstPurchaseDate()
+                + getId()
+                + getType()
+                + setFirstPurchaseDate()
+                + setId()
+                + setType()
+      }
+   
+      enum com.store.discount.models.CustomerType {
             AFFILIATE
             CUSTOMER
             EMPLOYEE
-      }
-  }
-  
 
-  namespace com.store.discount {
+      }
+   
       class com.store.discount.models.DiscountedBill {
-        - totalValue : double
-        - discountValue : double
-        - netPayable : double
+          - discountValue : double
+          - netPayable : double
+          - totalValue : double
+          + getDiscountValue()
+          + getNetPayable()
+          + getTotalValue()
+          + setDiscountValue()
+          + setNetPayable()
+          + setTotalValue()
       }
-  }
-  
 
-  namespace com.store.discount {
       class com.store.discount.models.Product {
-            - category : ProductCategory
-            - price : double
+          - id : long
+          - price : double
+          + Product()
+          + Product()
+          + getCategory()
+          + getId()
+          + getPrice()
+          + setCategory()
+          + setId()
+          + setPrice()
       }
-  }
+
+      enum com.store.discount.models.ProductCategory {
+        GROCERY
+        OTHER
+      }
+
+      interface com.store.discount.models.Purchase {
+          {abstract} + getCategory()
+          {abstract} + getCustomerId()
+          {abstract} + getCustomerType()
+          {abstract} + getFirstPurchase()
+          {abstract} + getPrice()
+          {abstract} + getProductId()
+          {abstract} + getTransactionId()
+      }
+
+      class com.store.discount.models.Transaction {
+          - customerId : long
+          - id : long
+          - productId : long
+          + Transaction()
+          + Transaction()
+          + getCustomerId()
+          + getId()
+          + getProductId()
+          + setCustomerId()
+          + setId()
+          + setProductId()
+      }
   
-
-  namespace com.store.discount {
-      enum ProductCategory {
-         GROCERY
-         OTHER
+   
+      class com.store.discount.models.TransactionId {
+          - customerId : long
+          - id : long
+          - productId : long
+          + TransactionId()
+          + TransactionId()
+          + equals()
+          + hashCode()
       }
-  }
 
 
-  namespace com.store.discount {
-      class com.store.discount.models.ShoppingCart {
-        - bill : Bill
-        - customer : Customer
+      interface com.store.discount.repositories.CustomerRepository {
       }
-  }
-  
 
-  namespace com.store.discount {
-      interface com.store.discount.services.BillDiscountService {
+
+      interface com.store.discount.repositories.ProductRepository {
       }
-  }
-  
 
-  namespace com.store.discount {
-      class com.store.discount.services.BillDiscountServiceImp {
+
+      interface com.store.discount.repositories.TransactionRepository {
+        {abstract} + queryBy()
       }
-  }
-  
 
-  com.store.discount.controllers.DiscountController o-- com.store.discount.services.BillDiscountService : billDiscountService
-  com.store.discount.models.Customer o-- com.store.discount.models.CustomerType : type
-  com.store.discount.models.Product o-- com.store.discount.models.ProductCategory : category
-  com.store.discount.models.ShoppingCart o-- com.store.discount.models.Bill : bill
-  com.store.discount.models.ShoppingCart *-- com.store.discount.models.Customer : customer
-  com.store.discount.models.Bill "1" *-- "*" com.store.discount.models.Product : products
-  com.store.discount.services.BillDiscountServiceImp .up.|> com.store.discount.services.BillDiscountService
+      class com.store.discount.helpers.DiscountFormulas {
+                {static} + getAffiliateDiscount()
+                {static} + getCustomerDiscount()
+                {static} + getEmployeeDiscount()
+                {static} + getRegularDiscount()
+                {static} + getTotalNonGroceryBillValue()
+                {static} + getTotalNonGroceryBillValue()
+                - DiscountFormulas()
+        }
 
+
+            class com.store.discount.helpers.Utility {
+                {static} + createCustomer()
+                {static} + createDate()
+                {static} + createLoyalCustomer()
+                {static} + createProduct()
+                {static} + createProductWithRandomPrice()
+                {static} + getBillTotalValue()
+                {static} + getDiscountedBill()
+                {static} + isOldCustomer()
+            }
+
+  com.store.discount.controllers.CustomerController o-- com.store.discount.repositories.CustomerRepository : customerRepository
+  com.store.discount.controllers.ProductController o-- com.store.discount.repositories.ProductRepository : productRepository
+  com.store.discount.controllers.TransactionController o-- com.store.discount.repositories.TransactionRepository : transactionRepository
+  com.store.discount.models.Customer "1" o--  "1" com.store.discount.models.CustomerType : type
+  com.store.discount.models.Product "1" o-- "1" com.store.discount.models.ProductCategory : category
+  com.store.discount.models.Purchase .. com.store.discount.models.Customer : customer
+  com.store.discount.models.Purchase .. com.store.discount.models.Product : product
+  com.store.discount.models.Transaction .up.|> java.io.Serializable
+  com.store.discount.models.TransactionId .up.|> java.io.Serializable
+  com.store.discount.controllers.TransactionController .. com.store.discount.models.Transaction : transactionRepository
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
 
 @enduml
