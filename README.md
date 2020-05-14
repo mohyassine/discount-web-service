@@ -154,7 +154,7 @@ Here is the coverage for the models package:
 ## SonarQube Report
 The code quality was analyzed using SonarQube. Here are some screenshots for the code analysis results of my project:
 
-![](/assets/Sonar_report.png 'SonarQube Report')
+![](/assets/sonar_report_details.png 'SonarQube Report Details')
 
 ![](/assets/sonar_report_summary.png 'SonarQube Report Summary')
 
@@ -164,7 +164,7 @@ To analyze the code:
 ```shell script
 ./sonar.sh console  
 ```
-* using your browser, open Sonar through the URL http://localhost:9000/, then login with admin/admin
+* using your browser, open Sonar through the URL `http://localhost:9000/`, then login with admin/admin
 * Click on create new project, generate a key for the project.
 * In the project, enable Sonar on Maven by adding the following to pom.xml:
 ```xml

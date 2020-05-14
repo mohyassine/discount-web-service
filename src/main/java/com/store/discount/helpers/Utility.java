@@ -8,6 +8,15 @@ import java.util.List;
 
 public class Utility {
 
+    private Utility() {
+    }
+
+    /**
+     * Return the sum of all purchase values
+     *
+     * @param purchases
+     * @return sum of all purchases
+     */
     public static double getBillTotalValue(List<Purchase> purchases) {
         double totalValue = 0;
         for (Purchase purchase : purchases) {

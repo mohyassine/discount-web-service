@@ -3,9 +3,7 @@ package com.store.discount;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.store.discount.constants.AppConstants;
 import com.store.discount.helpers.Utility;
-import com.store.discount.models.CustomerType;
-import com.store.discount.models.ProductCategory;
-import com.store.discount.models.Transaction;
+import com.store.discount.models.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -18,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.Date;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -140,7 +140,7 @@ public class AppControllersTest {
         // Transaction for customer 1 (Employee)
         long customerId = 1;
         Transaction transaction = new Transaction(transactionId, customerId, productId);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/transactions/")
+        mockMvc.perform(MockMvcRequestBuilders.post(AppConstants.TRANSACTIONS_URI)
                 .content(mapper.writeValueAsString(transaction))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -231,13 +231,26 @@ public class AppControllersTest {
     @Test
     @Order(9)
     public void testExceptions() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/all-customers/"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(AppConstants.CUSTOMERS_WRONG_URI))
                 .andExpect(status().isNotFound())
                 .andDo(print())
                 .andReturn();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/customers/"))
+        mockMvc.perform(MockMvcRequestBuilders.post(AppConstants.CUSTOMERS_URI))
                 .andExpect(status().isInternalServerError())
                 .andDo(print());
+    }
+
+    // Misc tests
+    @Test
+    @Order(10)
+    public void testTransactionId() throws Exception {
+        TransactionId transactionId1 = new TransactionId(1,1,1);
+        TransactionId transactionId2 = new TransactionId(1,1,1);
+        Customer customer = new Customer(1, CustomerType.EMPLOYEE, new Date());
+
+        assert( (transactionId1.equals(transactionId2) == false)
+        && transactionId1.hashCode() != transactionId2.hashCode()
+        && customer != null);
     }
 }
